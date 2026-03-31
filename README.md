@@ -1,3 +1,26 @@
+# HabitBreaker Landing (EN)
+
+Simple pre-launch waitlist landing page (English), ready for Vercel.
+
+## Setup
+
+1. Create the Supabase table by running migrations in your main project (you already ran `006`; also run `007`).
+2. In Vercel (or locally), set env vars:
+   - `SUPABASE_URL`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+
+Example file: `.env.example`
+
+## Run locally
+
+```bash
+npm run dev
+```
+
+## Where signups go
+
+Supabase table: `public.waitlist_signups`
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
