@@ -10,13 +10,11 @@ function getCountryFromHeaders(headers: Headers): string | null {
   const v = candidates.find((x) => x && x.trim().length > 0) ?? null;
   if (!v) return null;
   const cc = v.trim().toUpperCase();
-  // common values: "US", "RS"
   if (!/^[A-Z]{2}$/.test(cc)) return null;
   return cc;
 }
 
 function isValidEmail(email: string): boolean {
-  // pragmatic validation for waitlist capture
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
@@ -81,4 +79,3 @@ export async function POST(req: Request) {
     );
   }
 }
-

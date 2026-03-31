@@ -4,12 +4,16 @@ Simple pre-launch waitlist landing page (English), ready for Vercel.
 
 ## Setup
 
-1. Create the Supabase table by running migrations in your main project (you already ran `006`; also run `007`).
-2. In Vercel (or locally), set env vars:
+1. Run Supabase migrations: `006` and `007` (and `008` if you already added it — optional, unused by this flow).
+2. Upload your PDF to **Google Drive**, share it (anyone with the link can view), copy the link.
+3. Env vars (Vercel or `.env.local`):
    - `SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
+   - `NEXT_PUBLIC_GOOGLE_DRIVE_PDF_URL` — your Google Drive file/folder URL
 
 Example file: `.env.example`
+
+After signup, users see a success message with a button that opens the PDF on Google Drive.
 
 ## Run locally
 

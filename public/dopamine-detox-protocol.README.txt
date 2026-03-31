@@ -1,0 +1,6 @@
+PDF delivery is via Google Drive.
+
+Set NEXT_PUBLIC_GOOGLE_DRIVE_PDF_URL in .env.local (and Vercel) to your
+shared file or folder link. The success screen shows an “Open PDF” button.
+
+No PDF file needs to live in /public anymore.

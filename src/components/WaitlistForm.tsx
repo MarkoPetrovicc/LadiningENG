@@ -8,6 +8,8 @@ type Props = {
   buttonLabel: string;
   successTitle: string;
   successBody: string;
+  pdfDriveUrl: string;
+  pdfLinkLabel: string;
   errorInvalidEmail: string;
   errorGeneric: string;
 };
@@ -51,6 +53,10 @@ export function WaitlistForm(props: Props) {
     }
   }
 
+  const showPdfLink =
+    props.pdfDriveUrl.length > 0 &&
+    /^https?:\/\//i.test(props.pdfDriveUrl.trim());
+
   if (status === "success") {
     return (
       <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
@@ -60,6 +66,16 @@ export function WaitlistForm(props: Props) {
         <p className="mt-2 text-sm leading-6 text-white/70">
           {props.successBody}
         </p>
+        {showPdfLink ? (
+          <a
+            href={props.pdfDriveUrl.trim()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-2xl bg-white px-5 text-sm font-semibold text-black transition hover:bg-white/90 sm:w-auto"
+          >
+            {props.pdfLinkLabel}
+          </a>
+        ) : null}
       </div>
     );
   }
@@ -96,4 +112,3 @@ export function WaitlistForm(props: Props) {
     </form>
   );
 }
-

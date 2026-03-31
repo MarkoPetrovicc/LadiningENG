@@ -1,5 +1,8 @@
 import { WaitlistForm } from "../components/WaitlistForm";
 
+const pdfDriveUrl =
+  process.env.NEXT_PUBLIC_GOOGLE_DRIVE_PDF_URL?.trim() ?? "";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#070913] text-white">
@@ -25,9 +28,48 @@ export default function Home() {
             </h1>
 
             <p className="mt-5 max-w-xl text-pretty text-lg leading-8 text-white/70">
-              The app is releasing soon. Join the waitlist to get early access,
-              first features, and the best chance to lock in your momentum.
+              The app is releasing soon. Join the waitlist for early access — and
+              unlock the free Dopamine Detox Protocol (Google Drive) right after
+              you sign up.
             </p>
+
+            <div className="mt-7">
+              <div className="text-sm font-medium text-white/80">
+                Get early access
+              </div>
+
+              <div className="mt-4 rounded-2xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/10 to-cyan-500/5 p-4 sm:p-5">
+                <div className="text-xs font-semibold uppercase tracking-wide text-emerald-300/90">
+                  Free gift — instant download
+                </div>
+                <p className="mt-2 text-sm leading-6 text-white/90">
+                  After you join, you’ll get a link to the{" "}
+                  <span className="font-semibold text-white">
+                    Dopamine Detox Protocol
+                  </span>{" "}
+                  on Google Drive — a practical PDF to reset cravings, sharpen
+                  focus, and build daily discipline.
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <WaitlistForm
+                  locale="en"
+                  placeholder="Enter your email"
+                  buttonLabel="Join waitlist"
+                  successTitle="You're in."
+                  successBody="Open the PDF below. We’ll email you when early access opens."
+                  pdfDriveUrl={pdfDriveUrl}
+                  pdfLinkLabel="Open Dopamine Detox Protocol (Google Drive)"
+                  errorInvalidEmail="Please enter a valid email address."
+                  errorGeneric="Something went wrong. Please try again."
+                />
+              </div>
+
+              <p className="mt-3 text-xs text-white/50">
+                No spam. Launch updates only (PDF is on Google Drive).
+              </p>
+            </div>
 
             <p className="mt-4 max-w-xl text-pretty text-sm leading-6 text-white/60">
               For most people it’s not just “willpower” — it’s a system. Track
@@ -50,28 +92,6 @@ export default function Home() {
                   {t}
                 </div>
               ))}
-            </div>
-
-            <div className="mt-10">
-              <div className="text-sm font-medium text-white/80">
-                Get early access
-              </div>
-              <div className="mt-3">
-                <WaitlistForm
-                  locale="en"
-                  placeholder="Enter your email"
-                  buttonLabel="Join waitlist"
-                  successTitle="You're in."
-                  successBody="We’ll email you as soon as early access opens."
-                  errorInvalidEmail="Please enter a valid email address."
-                  errorGeneric="Something went wrong. Please try again."
-                />
-              </div>
-
-              <p className="mt-3 text-xs text-white/50">
-                No spam. One email when we launch (and maybe a couple of key
-                updates).
-              </p>
             </div>
           </div>
 
