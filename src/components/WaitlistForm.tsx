@@ -12,6 +12,8 @@ type Props = {
   pdfLinkLabel: string;
   errorInvalidEmail: string;
   errorGeneric: string;
+  /** Larger input + button for above-the-fold hero */
+  prominent?: boolean;
 };
 
 export function WaitlistForm(props: Props) {
@@ -80,9 +82,17 @@ export function WaitlistForm(props: Props) {
     );
   }
 
+  const p = props.prominent;
+  const inputClass = p
+    ? "h-16 w-full rounded-2xl border-2 border-white/20 bg-black/40 px-4 text-base text-white shadow-inner placeholder:text-white/45 outline-none transition focus:border-cyan-400/60 focus:bg-black/50 focus:ring-4 focus:ring-cyan-500/20 sm:text-lg"
+    : "h-14 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-white placeholder:text-white/40 outline-none ring-0 transition focus:border-white/25 focus:bg-white/10";
+  const btnClass = p
+    ? "h-16 shrink-0 rounded-2xl bg-gradient-to-r from-white to-white/95 px-8 text-base font-bold text-black shadow-lg shadow-cyan-500/25 ring-2 ring-white/30 transition enabled:hover:brightness-105 disabled:opacity-60 sm:min-w-[11rem]"
+    : "h-14 rounded-2xl bg-white px-6 font-semibold text-black transition enabled:hover:bg-white/90 disabled:opacity-60";
+
   return (
     <form onSubmit={onSubmit} className="w-full">
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
         <label className="flex-1">
           <span className="sr-only">Email</span>
           <input
@@ -91,14 +101,10 @@ export function WaitlistForm(props: Props) {
             placeholder={props.placeholder}
             inputMode="email"
             autoComplete="email"
-            className="h-14 w-full rounded-2xl border border-white/10 bg-white/5 px-4 text-white placeholder:text-white/40 outline-none ring-0 transition focus:border-white/25 focus:bg-white/10"
+            className={inputClass}
           />
         </label>
-        <button
-          type="submit"
-          disabled={!canSubmit}
-          className="h-14 rounded-2xl bg-white px-6 font-semibold text-black transition enabled:hover:bg-white/90 disabled:opacity-60"
-        >
+        <button type="submit" disabled={!canSubmit} className={btnClass}>
           {status === "loading" ? "Sending…" : props.buttonLabel}
         </button>
       </div>
