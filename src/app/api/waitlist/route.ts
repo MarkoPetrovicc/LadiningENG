@@ -14,6 +14,7 @@ function getCountryFromHeaders(headers: Headers): string | null {
   return cc;
 }
 
+
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
