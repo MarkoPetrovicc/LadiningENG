@@ -14,15 +14,44 @@ function getCountryFromHeaders(headers: Headers): string | null {
   return cc;
 }
 
-
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function sanitizeQuizSummary(raw: unknown): Record<string, unknown> | null {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return null;
+  const o = raw as Record<string, unknown>;
+  if (!Array.isArray(o.tags)) return null;
+  const tags = o.tags
+    .filter((t): t is string => typeof t === "string")
+    .map((t) => t.replace(/[^\w-]/g, "").slice(0, 64))
+    .filter(Boolean)
+    .slice(0, 48);
+  const answers: Record<string, string> = {};
+  if (o.answers && typeof o.answers === "object" && !Array.isArray(o.answers)) {
+    for (const [k, v] of Object.entries(
+      o.answers as Record<string, unknown>,
+    )) {
+      if (typeof v !== "string") continue;
+      const key = k.slice(0, 64);
+      if (key) answers[key] = v.slice(0, 256);
+    }
+  }
+  return {
+    tags,
+    ...(Object.keys(answers).length ? { answers } : {}),
+    saved_at: new Date().toISOString(),
+  };
 }
 
 export async function POST(req: Request) {
   try {
     const body = (await req.json().catch(() => null)) as
-      | { email?: unknown }
+      | {
+          email?: unknown;
+          quiz_summary?: unknown;
+          session_id?: unknown;
+        }
       | null;
 
     const email = typeof body?.email === "string" ? body.email.trim() : "";
@@ -34,15 +63,21 @@ export async function POST(req: Request) {
     }
 
     const country = getCountryFromHeaders(req.headers);
+    const quiz_summary = sanitizeQuizSummary(body?.quiz_summary);
+    const session_id =
+      typeof body?.session_id === "string" ? body.session_id.trim().slice(0, 64) : null;
 
-    const { error } = await getSupabaseAdmin().from("waitlist_signups").upsert(
-      {
-        email,
-        locale: "en",
-        country,
-      },
-      { onConflict: "email_lower" },
-    );
+    const row: Record<string, unknown> = {
+      email,
+      locale: "en",
+      country,
+    };
+    if (quiz_summary) row.quiz_summary = quiz_summary;
+    if (session_id) row.quiz_summary = { ...(quiz_summary ?? {}), session_id };
+
+    const { error } = await getSupabaseAdmin()
+      .from("waitlist_signups")
+      .upsert(row, { onConflict: "email_lower" });
 
     if (error) {
       console.error("waitlist upsert error", {

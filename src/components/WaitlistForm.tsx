@@ -4,6 +4,8 @@ import { useMemo, useState } from "react";
 
 type Props = {
   locale: "en" | "sr";
+  /** Visible label above the field (better than placeholder alone). */
+  emailLabel?: string;
   placeholder: string;
   buttonLabel: string;
   successTitle: string;
@@ -14,6 +16,9 @@ type Props = {
   errorGeneric: string;
   /** Larger input + button for above-the-fold hero */
   prominent?: boolean;
+  quizSummary?: { tags: string[]; answers: Record<string, string> };
+  extraBody?: Record<string, unknown>;
+  onSuccess?: () => void;
 };
 
 export function WaitlistForm(props: Props) {
@@ -36,11 +41,22 @@ export function WaitlistForm(props: Props) {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email: email.trim(), locale: props.locale }),
+        body: JSON.stringify({
+          email: email.trim(),
+          locale: props.locale,
+          quiz_summary: props.quizSummary
+            ? {
+                tags: props.quizSummary.tags,
+                answers: props.quizSummary.answers,
+              }
+            : undefined,
+          ...(props.extraBody ?? {}),
+        }),
       });
 
       if (res.ok) {
         setStatus("success");
+        props.onSuccess?.();
         return;
       }
 
@@ -90,11 +106,21 @@ export function WaitlistForm(props: Props) {
     ? "h-16 shrink-0 rounded-2xl bg-gradient-to-r from-white to-white/95 px-8 text-base font-bold text-black shadow-lg shadow-cyan-500/25 ring-2 ring-white/30 transition enabled:hover:brightness-105 disabled:opacity-60 sm:min-w-[11rem]"
     : "h-14 rounded-2xl bg-white px-6 font-semibold text-black transition enabled:hover:bg-white/90 disabled:opacity-60";
 
+  const labelText = props.emailLabel?.trim();
+
   return (
     <form onSubmit={onSubmit} className="w-full">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <label className="flex-1">
-          <span className="sr-only">Email</span>
+          {labelText ? (
+            <span
+              className={`mb-2 block font-medium text-white/90 ${p ? "text-sm sm:text-base" : "text-sm"}`}
+            >
+              {labelText}
+            </span>
+          ) : (
+            <span className="sr-only">Email</span>
+          )}
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}

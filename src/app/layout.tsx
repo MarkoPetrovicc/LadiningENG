@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HabitBreaker — Early Access Waitlist",
+  title: "HabitBreaker · Quick check in and early access",
   description:
-    "Join the HabitBreaker early access waitlist. 90 days of nofap can change your life — get the AI mentor and streak support first.",
+    "Take a 2 minute check in, see your pattern, and join the waitlist. Releasing next week. Free dopamine detox PDF for signups, first month free, AI mentor, streaks, and SOS support.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full bg-[#070913] antialiased`}
       suppressHydrationWarning
     >
       <Script
@@ -41,7 +41,31 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'AW-18055944609');`}
       </Script>
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
+      <Script id="meta-pixel" strategy="afterInteractive">
+        {`!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '871481225940898');
+fbq('track', 'PageView');`}
+      </Script>
+      <body
+        className="min-h-full flex flex-col bg-[#070913] text-white"
+        suppressHydrationWarning
+      >
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            className="hidden"
+            src="https://www.facebook.com/tr?id=871481225940898&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
         {children}
       </body>
     </html>
