@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import DeleteEmailButton from "./DeleteEmailButton";
 
 export const metadata: Metadata = {
   title: "Delete Account · HabitBreaker",
@@ -86,8 +85,6 @@ export default function DeleteAccountPage() {
             </div>
           ))}
         </div>
-
-        <DeleteEmailButton />
 
         {/* What gets deleted */}
         <div className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5 mb-10">
