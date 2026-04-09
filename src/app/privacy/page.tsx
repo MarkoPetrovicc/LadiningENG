@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy · HabitBreaker",
+  description:
+    "How HabitBreaker collects, uses, and protects your personal data.",
+};
+
 const sections = [
   {
     title: "1. Information We Collect",
@@ -25,7 +34,7 @@ const sections = [
   },
   {
     title: "7. Data Retention & Deletion",
-    body: "We retain your data for as long as your account is active. You can delete your account from Settings inside the App or by emailing habitbreaker531@gmail.com. All personal data is permanently deleted within 30 days of an account deletion request.",
+    body: "We retain your data for as long as your account is active. You can delete your account from Settings inside the App or by visiting our account deletion page. All personal data is permanently deleted within 30 days of an account deletion request.",
   },
   {
     title: "8. Your Rights",
@@ -45,7 +54,7 @@ const sections = [
   },
 ];
 
-export default function PrivacyPolicy() {
+export default function PrivacyPolicyPage() {
   return (
     <div className="relative min-h-screen bg-[#070913] text-white">
       <div
@@ -58,7 +67,9 @@ export default function PrivacyPolicy() {
 
       <main className="relative z-10 mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="mb-2 text-xs font-medium uppercase tracking-widest text-white/40">
-          HabitBreaker
+          <Link href="/" className="hover:text-white/60 transition-colors">
+            HabitBreaker
+          </Link>
         </div>
         <h1 className="mb-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
           Privacy Policy
@@ -91,12 +102,12 @@ export default function PrivacyPolicy() {
         </div>
 
         <div className="mt-10 text-center">
-          <a
+          <Link
             href="/delete-account"
             className="text-sm text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors"
           >
             Request account &amp; data deletion →
-          </a>
+          </Link>
         </div>
 
         <footer className="mt-16 border-t border-white/10 pt-8 text-center text-xs text-white/30">
