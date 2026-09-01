@@ -218,6 +218,12 @@ export default function TermsOfServicePage() {
           >
             Account deletion
           </Link>
+          <Link
+            href="/support"
+            className="text-sm text-cyan-400 underline underline-offset-4 transition-colors hover:text-cyan-300"
+          >
+            Support
+          </Link>
         </div>
 
         <footer className="mt-16 border-t border-white/10 pt-8 text-center text-xs text-white/30">
