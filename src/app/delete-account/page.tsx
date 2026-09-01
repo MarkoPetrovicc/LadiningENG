@@ -2,34 +2,27 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Delete Account · HabitBreaker",
+  title: "Delete Your HabitBreaker Account",
   description:
-    "Request deletion of your HabitBreaker account and all associated data.",
+    "Permanently delete your HabitBreaker account and associated App data.",
 };
 
-const SUPPORT_EMAIL = "habitbreaker531@gmail.com";
-
-const steps = [
-  {
-    num: "1",
-    title: "In-app (fastest)",
-    body: 'Open HabitBreaker → Profile → Settings → scroll to "Delete account" and confirm. Your data is removed immediately.',
-  },
-  {
-    num: "2",
-    title: "By email",
-    body: `Send an email to ${SUPPORT_EMAIL} from the address you used to register. Include "Delete my account" in the subject. We will verify your identity and permanently delete all data within 30 days.`,
-  },
+const deletedItems = [
+  "Your HabitBreaker authentication account.",
+  "Your profile, name, username, and account settings.",
+  "Daily check-ins, notes, mood, and urge information.",
+  "Relapse records and risk estimates.",
+  "Stored AI-generated check-in feedback.",
+  "Community posts and comments connected to your account, if applicable.",
+  "Account-linked local progress and AI Mentor chat history when deletion is initiated through the App on that device.",
 ];
 
-const deletedItems = [
-  "Your profile (name, username, email)",
-  "All daily check-ins, mood and urge logs",
-  "Relapse records and risk scores",
-  "AI Mentor (SOS) chat sessions and messages",
-  "Community posts and comments",
-  "Push notification tokens",
-  "Subscription and entitlement records",
+const retainedItems = [
+  "Apple and Google retain purchase and transaction records under their legal obligations.",
+  "RevenueCat may retain limited purchase and entitlement records needed for restoration, fraud prevention, or legal compliance.",
+  "Provider backups may retain deleted information until the applicable backup cycle expires.",
+  "Security, fraud-prevention, support, tax, and legal records may be retained where required.",
+  "AI providers may retain request records according to their settings and legal obligations.",
 ];
 
 export default function DeleteAccountPage() {
@@ -45,76 +38,151 @@ export default function DeleteAccountPage() {
 
       <main className="relative z-10 mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <div className="mb-2 text-xs font-medium uppercase tracking-widest text-white/40">
-          <Link href="/" className="hover:text-white/60 transition-colors">
+          <Link href="/" className="transition-colors hover:text-white/60">
             HabitBreaker
           </Link>
         </div>
-        <h1 className="mb-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-          Delete Your Account
+        <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
+          Delete Your HabitBreaker Account
         </h1>
-        <p className="mb-10 text-sm text-white/40">
-          We respect your right to be forgotten.
-        </p>
 
-        <p className="mb-10 text-base leading-relaxed text-white/70">
-          You can permanently delete your HabitBreaker account and all
-          associated data at any time. Choose whichever method is easiest for
-          you:
-        </p>
-
-        {/* Methods */}
-        <div className="space-y-6 mb-12">
-          {steps.map((step) => (
-            <div
-              key={step.num}
-              className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5"
-            >
-              <div className="flex items-start gap-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-sm font-bold text-cyan-400">
-                  {step.num}
-                </span>
-                <div>
-                  <h2 className="mb-1 text-sm font-semibold uppercase tracking-wide text-cyan-400">
-                    {step.title}
-                  </h2>
-                  <p className="text-sm leading-relaxed text-white/65">
-                    {step.body}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* What gets deleted */}
-        <div className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5 mb-10">
-          <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cyan-400">
-            What gets deleted
-          </h2>
-          <ul className="space-y-2">
-            {deletedItems.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-2 text-sm leading-relaxed text-white/65"
-              >
-                <span className="mt-1 text-red-400">✕</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 text-xs text-white/40">
-            Deletion is permanent and cannot be undone. Data is removed within
-            30 days of receiving your request.
+        <div className="mb-8 space-y-4 text-base leading-relaxed text-white/70">
+          <p>
+            You can permanently delete your HabitBreaker account and associated
+            App data.
+          </p>
+          <p className="rounded-xl border border-amber-400/20 bg-amber-400/[0.06] px-4 py-3 text-sm text-amber-100/80">
+            Important: deleting your HabitBreaker account does not cancel an
+            Apple App Store or Google Play subscription. Cancel your
+            subscription separately through your store account.
           </p>
         </div>
 
-        {/* Links */}
-        <div className="flex flex-col items-center gap-3">
+        <div className="space-y-8">
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cyan-400">
+              Delete in the App
+            </h2>
+            <ol className="list-decimal space-y-2 pl-5 text-sm leading-relaxed text-white/65">
+              <li>Open HabitBreaker.</li>
+              <li>Open Profile.</li>
+              <li>Select Delete account.</li>
+              <li>Review the warning and confirm deletion.</li>
+            </ol>
+            <p className="mt-4 text-sm leading-relaxed text-white/65">
+              In-app deletion removes your Supabase account and associated App
+              records immediately. It also clears account-linked local progress
+              and AI Mentor chat history from that device.
+            </p>
+          </section>
+
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cyan-400">
+              Request Deletion by Email
+            </h2>
+            <div className="space-y-3 text-sm leading-relaxed text-white/65">
+              <p>Send an email from the address connected to your account:</p>
+              <div>
+                <p>Email: habitbreaker531@gmail.com</p>
+                <p>Subject: Delete my HabitBreaker account</p>
+              </div>
+              <p>
+                We may request information needed to verify that you own the
+                account. Verified requests are normally completed within 30
+                days.
+              </p>
+              <p>
+                If deletion is performed by email, local information may remain
+                on devices where HabitBreaker is installed. Uninstall the App
+                or clear its storage to remove remaining local files.
+              </p>
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cyan-400">
+              Information We Delete
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-white/65">
+              Subject to lawful retention exceptions, deletion includes:
+            </p>
+            <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-white/65">
+              {deletedItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cyan-400">
+              Information That May Remain
+            </h2>
+            <p className="mb-3 text-sm leading-relaxed text-white/65">
+              Some information cannot be deleted immediately or is controlled
+              by another provider:
+            </p>
+            <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-white/65">
+              {retainedItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cyan-400">
+              Subscriptions
+            </h2>
+            <div className="space-y-3 text-sm leading-relaxed text-white/65">
+              <p>Account deletion does not cancel recurring charges.</p>
+              <p>
+                Manage Apple subscriptions:{" "}
+                <a
+                  href="https://apps.apple.com/account/subscriptions"
+                  className="text-cyan-400 underline underline-offset-4 hover:text-cyan-300"
+                >
+                  apps.apple.com/account/subscriptions
+                </a>
+              </p>
+              <p>
+                Manage Google Play subscriptions:{" "}
+                <a
+                  href="https://play.google.com/store/account/subscriptions"
+                  className="text-cyan-400 underline underline-offset-4 hover:text-cyan-300"
+                >
+                  play.google.com/store/account/subscriptions
+                </a>
+              </p>
+              <p>
+                After account deletion, restoring a previous purchase may
+                require signing in with the same Apple or Google store account.
+              </p>
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-white/[0.07] bg-white/[0.03] px-6 py-5">
+            <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-cyan-400">
+              Contact
+            </h2>
+            <div className="text-sm leading-relaxed text-white/65">
+              <p>Operator: Marko Petrovic</p>
+              <p>Contact location: Novi Sad, Republic of Serbia</p>
+              <p>Email: habitbreaker531@gmail.com</p>
+            </div>
+          </section>
+        </div>
+
+        <div className="mt-10 flex flex-col items-center gap-3">
           <Link
             href="/privacy"
-            className="text-sm text-cyan-400 hover:text-cyan-300 underline underline-offset-4 transition-colors"
+            className="text-sm text-cyan-400 underline underline-offset-4 transition-colors hover:text-cyan-300"
           >
             Privacy Policy
+          </Link>
+          <Link
+            href="/terms"
+            className="text-sm text-cyan-400 underline underline-offset-4 transition-colors hover:text-cyan-300"
+          >
+            Terms of Service
           </Link>
         </div>
 
